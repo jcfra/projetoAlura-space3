@@ -2,6 +2,7 @@ from django import forms
 
 class LoginForms(forms.Form):
     nome_login=forms.CharField(
+        error_messages={"required": "Por favor, informe o seu nome."},
         label='Nome de Login', 
         required=True, 
         max_length=100,
@@ -26,6 +27,7 @@ class LoginForms(forms.Form):
 
 class CadastroForms(forms.Form):
     nome_cadastro=forms.CharField(
+        error_messages={"required": "Por favor, informe o seu nome."},
         label='Nome de Cadastro', 
         required=True, 
         max_length=100,
@@ -69,3 +71,11 @@ class CadastroForms(forms.Form):
             }
         ),
     )
+    def clean_nome_cadastro(self):
+        nome = self.cleaned_data.get('nome_cadastro')
+        if nome:
+            nome = nome.strip()
+            if " " in nome:
+                raise forms.ValidationError("O nome de usuário não pode conter espaços")
+            else:
+                return nome

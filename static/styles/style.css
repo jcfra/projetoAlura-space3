@@ -38,6 +38,7 @@ body {
     background-position: center;
     background-size: cover;
 }
+
 ol, ul {
     list-style: none;
 }
@@ -340,6 +341,9 @@ table {
     display: flex;
     justify-content: space-between;
     color: #FFFFFF;
+    position:absolute;
+    bottom:0;
+    left:0;
 }
 
 .rodape__icones {
